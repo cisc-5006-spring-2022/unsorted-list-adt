@@ -3,8 +3,6 @@
 
 #include "UnsortedList.h"
 
-#include <string>
-
 using namespace std;
 
 // An array-based implementation of the unsorted list ADT

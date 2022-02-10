@@ -1,5 +1,6 @@
 #include "UnsortedList.h"
 #include "ArrayUnsortedList.h"
+#include "LinkedUnsortedList.h"
 
 #include <iostream>
 
@@ -13,17 +14,26 @@ void testList(UnsortedList<int> &l) {
     l.PutItem(-100);
     l.RemoveItem(19);
 
-    int found = l.GetItem(20);
-    cout << found << endl;
+    int found = l.GetItem(21);
+    cout << "Fount 21" << endl;
+
+    try {
+        found = l.GetItem(19);
+    } catch(NotFoundException e) {
+        cout << "19 not found - OK" << endl;
+    }
 
     try {
         found = l.GetItem(200);
     } catch(NotFoundException e) {
-        cout << "200 not found" << endl;
+        cout << "200 not found - OK" << endl;
     }
 }
 
 int main() {
-    ArrayUnsortedList<int> list = ArrayUnsortedList<int>(100);
-    testList(list);
+    ArrayUnsortedList<int> arrayList = ArrayUnsortedList<int>(100);
+    testList(arrayList);
+
+    LinkedUnsortedList<int> linkedList = LinkedUnsortedList<int>();
+    testList(linkedList);
 }
