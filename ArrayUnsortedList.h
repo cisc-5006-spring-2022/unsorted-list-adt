@@ -55,10 +55,24 @@ class ArrayUnsortedList: public UnsortedList<ItemType> {
             this->size--;
         }
         
+        virtual int GetLength() {
+            return size;
+        }
+
+        virtual void ResetList() {
+            currentItem = -1;
+        }
+
+        virtual ItemType GetNextItem() {
+            currentItem++;
+            return items[currentItem];
+        }
+
     private:
         int maxSize;
         int size;
         ItemType *items;
+        int currentItem;
 };
 
 #endif
