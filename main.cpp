@@ -1,6 +1,6 @@
 #include "UnsortedList.h"
 #include "ArrayUnsortedList.h"
-#include "LinkedUnsortedList.h"
+//#include "LinkedUnsortedList.h"
 
 #include <iostream>
 
@@ -34,6 +34,22 @@ int main() {
     ArrayUnsortedList<int> arrayList = ArrayUnsortedList<int>(100);
     testList(arrayList);
 
-    LinkedUnsortedList<int> linkedList = LinkedUnsortedList<int>();
-    testList(linkedList);
+    arrayList.ResetList();
+
+    cout << endl << "Iterator output:" << endl;
+
+    for(int i = 0; i < arrayList.GetLength(); i++) {
+        cout << arrayList.GetNextItem() / 2 << endl;
+    }
+
+    arrayList.ResetList();
+
+    cout << endl << "Iterator output:" << endl;
+
+    for(int i = 0; i < arrayList.GetLength(); i++) {
+        cout << arrayList.GetNextItem() << endl;
+    }
+
+    // LinkedUnsortedList<int> linkedList = LinkedUnsortedList<int>();
+    // testList(linkedList);
 }

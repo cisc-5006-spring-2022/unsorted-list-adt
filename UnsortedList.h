@@ -39,6 +39,10 @@ class UnsortedList {
          * Postcondition: Element in list whose key matches item's key is returned
          */
         virtual ItemType GetItem(ItemType item)=0;
+
+        virtual int GetLength()=0;
+        virtual void ResetList()=0;
+        virtual ItemType GetNextItem()=0;
 };
 
 #endif
