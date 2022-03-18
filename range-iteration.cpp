@@ -15,7 +15,7 @@ void testList(UnsortedList<int> &l) {
     l.RemoveItem(19);
 
     int found = l.GetItem(21);
-    cout << "Found 21" << endl;
+    cout << "Fount 21" << endl;
 
     try {
         found = l.GetItem(19);
@@ -31,33 +31,17 @@ void testList(UnsortedList<int> &l) {
 }
 
 int main() {
-
-    cout << "Linked list" << endl;
-
     LinkedUnsortedList<int> list = LinkedUnsortedList<int>();
     testList(list);
 
+    cout << endl;
 
-    list.ResetList();
-
-    cout << endl << "Iterator output:" << endl;
-
-    for(int i = 0; i < list.GetLength(); i++) {
-        cout << list.GetNextItem() << endl;
-    }
-
-
-    cout << endl << endl << "Array list" << endl;
-
-    ArrayUnsortedList<int> list2 = ArrayUnsortedList<int>(100);
-    testList(list2);
-
-
-    list2.ResetList();
-
-    cout << endl << "Iterator output:" << endl;
-
-    for(int i = 0; i < list2.GetLength(); i++) {
-        cout << list2.GetNextItem() << endl;
+    // This is possible because of the iterator we implemented in
+    // the LinkedUnsortedList. Note that we have not implemented
+    // range-based iteration in the ArrayUnsortedList (though it is
+    // possible to do so!), so this will not work with an
+    // ArrayUnsortedList object!
+    for (int i: list) {
+        cout << i << endl;
     }
 }

@@ -14,6 +14,38 @@ struct NodeType {
     NodeType *next;
 };
 
+// Iterator object type: Enables iteration using the range-based
+// for loop in C++.
+template <class ItemType>
+class LinkedUnsortedListIterator {
+    public:
+        // Create a LinkedUnsortedListIterator with a node in the list
+        LinkedUnsortedListIterator(NodeType<ItemType> *val) {
+            this->val = val;
+        }
+
+        // Dereference operator: Retrieve the current value
+        ItemType operator*() {
+            return val->info;
+        }
+
+        // Increment operator: Move to the next item in the list
+        LinkedUnsortedListIterator<ItemType> &operator++() {
+            if (val != NULL) {
+                val = val->next;
+            }
+            return *this;
+        }
+
+        // Equality checking operator: Check whether this iterator is at
+        // the same position as another
+        bool operator!=(const LinkedUnsortedListIterator<ItemType> &it) const {
+            return val != it.val;
+        }
+    private:
+        NodeType<ItemType> *val;
+};
+
 // A linked list-based implementation of the unsorted list ADT
 template <class ItemType>
 class LinkedUnsortedList: public UnsortedList<ItemType> {
@@ -22,6 +54,20 @@ class LinkedUnsortedList: public UnsortedList<ItemType> {
         LinkedUnsortedList() {
             listData = NULL;
             this->size = 0;
+        }
+
+        // Return an iterator at the beginning of the list.
+        // This is necessary to enable C++ range-based iteration.
+        LinkedUnsortedListIterator<ItemType> begin() {
+            LinkedUnsortedListIterator<ItemType> it(listData);
+            return it;
+        }
+
+        // Return an iterator at the end of the list.
+        // This is necessary to enable C++ range-based iteration.
+        LinkedUnsortedListIterator<ItemType> end() {
+            LinkedUnsortedListIterator<ItemType> it = NULL;
+            return it;
         }
 
         virtual void PutItem(ItemType item) {
@@ -107,8 +153,28 @@ class LinkedUnsortedList: public UnsortedList<ItemType> {
                 this->size--;
             }
         }
+
+        virtual int GetLength() {
+            return size;
+        }
+
+        // ADT iterator functionality (an alternative to the range-based
+        // iteration): Reset the iterator to the beginning of the list
+        virtual void ResetList() {
+            currentItem = listData;
+        }
+
+        // ADT iterator functionality: Return the next item and advance
+        // the iteraor
+        virtual ItemType GetNextItem() {
+            ItemType tmp = currentItem->info;
+            currentItem = currentItem->next;
+
+            return tmp;
+        }
     private:
         NodeType<ItemType> *listData;
+        NodeType<ItemType> *currentItem;
         int size;
 };
 
